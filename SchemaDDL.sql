@@ -17,8 +17,15 @@ CREATE TABLE "departments" (
 );
 
 CREATE TABLE "dept_manager" (
-    "dept_no" int   NOT NULL,
+    "dept_no" varchar(10)   NOT NULL,
     "emp_no" int   NOT NULL,
+    "from_date" varchar(10)   NOT NULL,
+    "to_date" varchar(10)   NOT NULL
+);
+
+CREATE TABLE "dept_emp" (
+    "emp_no" int   NOT NULL,
+    "dept_no" varchar(10)   NOT NULL,
     "from_date" varchar(10)   NOT NULL,
     "to_date" varchar(10)   NOT NULL
 );
@@ -54,6 +61,12 @@ REFERENCES "departments" ("dept_no");
 
 ALTER TABLE "dept_manager" ADD CONSTRAINT "fk_dept_manager_emp_no" FOREIGN KEY("emp_no")
 REFERENCES "employees" ("emp_no");
+
+ALTER TABLE "dept_emp" ADD CONSTRAINT "fk_dept_emp_emp_no" FOREIGN KEY("emp_no")
+REFERENCES "employees" ("emp_no");
+
+ALTER TABLE "dept_emp" ADD CONSTRAINT "fk_dept_emp_dept_no" FOREIGN KEY("dept_no")
+REFERENCES "departments" ("dept_no");
 
 ALTER TABLE "titles" ADD CONSTRAINT "fk_titles_emp_no" FOREIGN KEY("emp_no")
 REFERENCES "employees" ("emp_no");
